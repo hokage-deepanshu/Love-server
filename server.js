@@ -1,14 +1,19 @@
 const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
+const cors = require('cors'); // <-- 1. YEH LINE ADD KARO
 
 const app = express();
+app.use(cors()); // <-- 2. YEH LINE ADD KARO
+
 const server = http.createServer(app);
 const io = socketIo(server, {
     cors: {
-        origin: "*", // Sabko allow karega, for simplicity
+        origin: "*",
+        methods: ["GET", "POST"] // <-- 3. Yeh bhi add kar do, best practice hai
     }
 });
+// ... baaki ka code
 
 const players = {};
 
